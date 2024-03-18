@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product Management</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product Management</h1>
+    <table id="productTable">
+        <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Product Date</th>
+            <th>Product Origin Price</th>
+            <th>Quantity</th>
+            <th>Product Store Code</th>
+        </tr>
+
+    </table>
+
+    <script>
+
+        fetch('/products')
+            .then(response => response.json())
+            .then(products => {
+
+                const table = document.getElementById('productTable');
+
+
+                for (const product of products) {
+                    const row = table.insertRow(-1);
+                    row.insertCell(0).textContent = product.ProductCode;
+                    row.insertCell(1).textContent = product.ProductName;
+                    row.insertCell(2).textContent = product.ProductDate;
+                    row.insertCell(3).textContent = product.ProductOriginPrice;
+                    row.insertCell(4).textContent = product.Quantity;
+                    row.insertCell(5).textContent = product.ProductStoreCode;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+
+</html>
